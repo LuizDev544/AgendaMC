@@ -1,5 +1,7 @@
 package AgendaMG.Crud.repository;
 
-public class EventoRepository {
-    //Interfaces JPA
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventoRepository<Evento> extends JpaRepository<Evento, Integer> {
+    //Repositórios (DAO)
 }
