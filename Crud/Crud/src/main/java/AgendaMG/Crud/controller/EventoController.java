@@ -14,31 +14,26 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    // Público: listar todos os eventos
     @GetMapping("/public/eventos")
     public List<Evento> listarEventosPublicos() {
         return eventoService.listarEventos();
     }
 
-    // Admin: listar eventos
     @GetMapping("/admin/eventos")
     public List<Evento> listarEventosAdmin() {
         return eventoService.listarEventos();
     }
 
-    // Admin: criar novo evento
     @PostMapping("/admin/eventos")
     public Evento criarEvento(@RequestBody Evento evento) {
         return eventoService.salvarEvento(evento);
     }
 
-    // Admin: editar evento
     @PutMapping("/admin/eventos/{id}")
     public Evento atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
         return eventoService.atualizarEvento(id, eventoAtualizado);
     }
 
-    // Admin: deletar evento
     @DeleteMapping("/admin/eventos/{id}")
     public void deletarEvento(@PathVariable int id) {
         eventoService.deletarEvento(id);

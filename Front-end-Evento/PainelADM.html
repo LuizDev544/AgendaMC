@@ -1,46 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../Front-end-crudevento/styles/PainelADM.css">
+    <title>Painel de Administração</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="../Front-end-crudevento/styles/PainelADM.css">
 </head>
-<body>
-    <h1>Painel de Administração - Eventos</h1>
-    <h2>Seja bem-vindo ao painel de administração de eventos, aqui voce poderá cadastrar os eventos que vão acontecer e deletalos tambem , dentro da tabela voce poderá editar qualquer campo que deseja caso voce erre sobre o evento que vai acontecer , faça bom uso!</h2>
-    <table class="table table-striped" id="eventTable">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome do Evento</th>
-                <th scope="col">Descrição do evento</th>
-                <th scope="col">Data do Evento</th>
-                <th scope="col">Local do Evento</th>
-                <th scope="col">Preço do evento</th>
-                <th scope="col">Capacidade P/Pessoa</th>
-                <th scope="col">Tipo do evento</th>
-                <th scope="col">Apresentador</th>
-                <th scope="col">Duração do evento</th>
-                <th scope="col">
-                    <button type="submit">Edição</button>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- As linhas da tabela serão inseridas aqui dinamicamente -->
-        </tbody>
-        <button>
-            <a href="../Front-end-crudevento/CadastrarEvento.html">Cadastrar Evento</a>
-        </button>
-        <button>
-            <a href="../Front-end-crudevento/ExcluirEvento.html">Excluir Evento</a>
-        </button>
-        <button>
-            <a href="../Front-end-crudevento/ConsultarEvento.html">Consultar Evento</a>
-        </button>
+<body class="bg-light">
+    <div class="container-fluid py-4 dashboard-container">
+        
+        <header class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary">Painel de Administração de Eventos</h1>
+        </header>
+        <div class="actions-bar mb-4">
+            <a href="CadastrarEvento.html" class="btn btn-success btn-action shadow-sm">
+                <i data-feather="plus-circle"></i> Cadastrar Evento
+            </a>
+            <a href="ExcluirEvento.html" class="btn btn-danger btn-action shadow-sm">
+                <i data-feather="trash-2"></i> Excluir Evento
+            </a>
+            <a href="ConsultarEvento.html" class="btn btn-info btn-action shadow-sm">
+                <i data-feather="search"></i> Consultar Evento
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white fw-bold">
+                Lista de Eventos Cadastrados
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-striped table-hover mb-0" id="eventTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Local</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Capacidade</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Apresentador</th>
+                            <th scope="col">Duração</th>
+                            <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+    
+    <script src="../Front-end-crudevento/scripts/PainelADM.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="../Front-end-crudevento/scripts/PainelADM.js"></script>
 </html>
