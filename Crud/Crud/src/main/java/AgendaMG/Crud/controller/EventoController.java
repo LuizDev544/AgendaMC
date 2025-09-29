@@ -28,8 +28,8 @@ public class EventoController {
 
     // Admin: criar novo evento
     @PostMapping("/admin/eventos")
-    public Evento criarEvento(@RequestBody Evento evento) {
-        return eventoService.salvarEvento(evento);
+    public Evento criarEvento(@RequestBody Evento novoEvento) {
+        return eventoService.obterEventoPorId(novoEvento);
     }
 
     // Admin: editar evento
