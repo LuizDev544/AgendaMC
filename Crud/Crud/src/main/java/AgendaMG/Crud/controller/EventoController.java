@@ -3,9 +3,11 @@ package AgendaMG.Crud.controller;
 import AgendaMG.Crud.entity.Evento;
 import AgendaMG.Crud.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -19,14 +21,17 @@ public class EventoController {
         return eventoService.listarEventos();
     }
 
+        @GetMapping("/public/eventos/{id}")
+    public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
+        Optional<Evento> evento = eventoService.buscarPorId(id);
+        
+        return evento.map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/admin/eventos")
     public List<Evento> listarEventosAdmin() {
         return eventoService.listarEventos();
-    }
-
-    @PostMapping("/admin/eventos")
-    public Evento criarEvento(@RequestBody Evento novoEvento) {
-        return eventoService.obterEventoPorId(novoEvento);
     }
 
     @PutMapping("/admin/eventos/{id}")
