@@ -1,4 +1,4 @@
-package AgendaMG.Crud.model;
+package AgendaMG.Crud.entity;
 
 public class Usuario {
     //Entidades (JPA)
