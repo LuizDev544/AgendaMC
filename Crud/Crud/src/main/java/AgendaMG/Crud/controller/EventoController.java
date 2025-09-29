@@ -3,47 +3,44 @@ package AgendaMG.Crud.controller;
 import AgendaMG.Crud.entity.Evento;
 import AgendaMG.Crud.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/Evento")
+@RequestMapping("/api")
 public class EventoController {
 
     @Autowired
     private EventoService eventoService;
 
-    @PostMapping
-    public ResponseEntity<Evento> criarEvento(@RequestBody Evento evento) {
-        return ResponseEntity.ok(eventoService.criarEvento(evento));
+    // Público: listar todos os eventos
+    @GetMapping("/public/eventos")
+    public List<Evento> listarEventosPublicos() {
+        return eventoService.listarEventos();
     }
 
-    @GetMapping
-    public ResponseEntity<List<Evento>> listarEventos() {
-        return ResponseEntity.ok(eventoService.listarEventos());
+    // Admin: listar eventos
+    @GetMapping("/admin/eventos")
+    public List<Evento> listarEventosAdmin() {
+        return eventoService.listarEventos();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Evento> buscarPorId(@PathVariable int id) {
-        return eventoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Admin: criar novo evento
+    @PostMapping("/admin/eventos")
+    public Evento criarEvento(@RequestBody Evento evento) {
+        return eventoService.salvarEvento(evento);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Evento> atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
-        return eventoService.atualizarEvento(id, eventoAtualizado)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Admin: editar evento
+    @PutMapping("/admin/eventos/{id}")
+    public Evento atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
+        return eventoService.atualizarEvento(id, eventoAtualizado);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarEvento(@PathVariable int id) {
-        if (eventoService.deletarEvento(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    // Admin: deletar evento
+    @DeleteMapping("/admin/eventos/{id}")
+    public void deletarEvento(@PathVariable int id) {
+        eventoService.deletarEvento(id);
     }
 }
