@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller 
 public class UsuarioController {
 
-    @GetMapping("/login")
+    @GetMapping("/Login")
     public String exibirFormularioLogin() {
-        return "login"; 
+        return "Login"; 
     }
 }
 

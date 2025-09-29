@@ -16,12 +16,18 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
+    @PostMapping("/admin/eventos") 
+    public ResponseEntity<Evento> salvarEvento(@RequestBody Evento evento) {
+        Evento novoEvento = eventoService.salvarEvento(evento);
+        return ResponseEntity.ok(novoEvento); 
+    }
+
     @GetMapping("/public/eventos")
     public List<Evento> listarEventosPublicos() {
         return eventoService.listarEventos();
     }
 
-        @GetMapping("/public/eventos/{id}")
+    @GetMapping("/public/eventos/{id}")
     public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
         Optional<Evento> evento = eventoService.buscarPorId(id);
         
