@@ -1,4 +1,4 @@
-package AgendaMG.Crud.configuration;
+package AgendaMG.Crud.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
