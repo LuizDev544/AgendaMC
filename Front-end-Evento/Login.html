@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login ADM</title>
-    <link rel="stylesheet" href="../Front-end-crudevento/styles/Login.css">
 </head>
 <body>
-    <h1>Login ADM</h1>
-    <form action="PainelADM.html" method="post">
-        <div>
-            <label for="username">Usuário:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Entrar</button>
-    </form>
+  <h1>Login Administrador</h1>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Usuário" required>
+    <input type="password" id="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <p id="msg"></p>
+
+    <script src="../Front-end-Evento/scripts/Login.js"></script>
 </body>
 </html>
