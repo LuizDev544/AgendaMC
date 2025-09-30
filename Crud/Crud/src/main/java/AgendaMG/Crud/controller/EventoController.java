@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +31,7 @@ public class EventoController {
     public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
         Optional<Evento> evento = eventoService.buscarPorId(id);
         
-        return evento.map(ResponseEntity::ok)
-                    .orElse(ResponseEntity.notFound().build());
+        return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/admin/eventos")

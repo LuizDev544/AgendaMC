@@ -24,7 +24,7 @@ async function deletarEvento() {
 
         document.querySelector('#deleteForm').reset();
     } catch (erro) {
-        document.querySelector('#mensagem').innerText = "Esqueceu de iniciar a aplicação burro!";
+        document.querySelector('#mensagem').innerText = "Esqueceu de iniciar a aplicação burro! 🫏";
         console.error(erro);
     }
 }
