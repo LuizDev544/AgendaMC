@@ -16,22 +16,22 @@ async function deletarEvento() {
             }
         });
 
-        if (resposta.ok) {
+        if (resposta.status == 404) {
+            alert(`ID ${id} não encontrado.`);
+        } else if (resposta.ok) {
             alert(`Evento ${id} excluído com sucesso!`);
             document.querySelector('#deleteForm').reset();
-        } else if (resposta.status === 404) {
-            alert(`ID ${id} não encontrado.`);
         } else {
             const erro = await resposta.text();
             alert(`Erro ao excluir: ${erro}`);
         }
+        
     } catch (erro) {
         console.error(erro);
         alert("Erro na requisição: " + erro.message);
     }
 }
 
-// Intercepta o submit para não recarregar a página
 document.getElementById('deleteForm').addEventListener('submit', function (e) {
     e.preventDefault();
     deletarEvento();

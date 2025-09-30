@@ -8,49 +8,50 @@
 </head>
 <body>
     <h1>Consultando Evento</h1>
-    <form action="">
+    <form class="Formulaio" action="">
         <label for="">Insira o ID do evento</label>
-        <input type="number" name="" id="">
-        <button id="" rule="" onclick="">Consultar Evento</button>
-        <div>
-            <p>Dados do Evnto</p>
+        <input type="number" name="idevento" id="idevento">
+        <button id="meubotao" rule="button" onclick="consultarProduto()">Consultar Evento</button>
+        <div id="resultado" class="main-div">
+            <p>Dados do Evento</p>
             <div>
-                <label for="">Nome do Evento</label>
-                <input type="text">
+                <label for="txtnome">Nome do Evento</label>
+                <input type="text" name="txtnome" id="txtnome">
             </div>
             <div>
-                <label for="">Descrição do evento</label>
-                <input type="text">
+                <label for="txtdescricao">Descrição do evento</label>
+                <input type="text" name="txtdescricao" id="txtdescricao">
             </div>
             <div>
-                <label for="">Data do Evento</label>
-                <input type="date">
+                <label for="txtdataevento">Data do Evento</label>
+                <input type="date" name="txtdataevento" id="txtdataevento">
             </div>
             <div>
-                <label for="">Local do Evento</label>
-                <input type="text">
+                <label for="txtlocal">Local do Evento</label>
+                <input type="text" name="txtlocal" id="txtlocal">
             </div>
             <div>
-                <label for="">Preço do evento</label>
-                <input type="number">
+                <label for="txtpreco">Preço do evento</label>
+                <input type="number" name="txtpreco" id="txtpreco">
             </div>
             <div>
-                <label for="">Capacidade P/Pessoa</label>
-                <input type="number">
+                <label for="txtcapacidade">Capacidade P/Pessoa</label>
+                <input type="number" name="txtcapacidade" id="txtcapacidade">
             </div>
             <div>
-                <label for="">Tipo do evento</label>
-                <input type="text">
+                <label for="txttipo">Tipo do evento</label>
+                <input type="text" name="txttipo" id="txttipo">
             </div>
             <div>
-                <label for="">Apresentador</label>
-                <input type="text">
+                <label for="txtapresentador">Apresentador</label>
+                <input type="text" name="txtapresentador" id="txtapresentador">
             </div>
             <div>
-                <label for="">Duração do evento</label>
-                <input type="time">
+                <label for="txtduracao">Duração do evento</label>
+                <input type="time" name="txtduracao" id="txtduracao">
             </div>
         </div>
     </form>
+    <script src="scripts/Consultar.js"></script>
 </body>
 </html>

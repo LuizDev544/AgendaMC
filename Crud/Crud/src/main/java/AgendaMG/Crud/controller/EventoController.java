@@ -3,6 +3,7 @@ package AgendaMG.Crud.controller;
 import AgendaMG.Crud.entity.Evento;
 import AgendaMG.Crud.service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,12 @@ public class EventoController {
 
     // Admin: deletar evento
     @DeleteMapping("/admin/eventos/{id}")
-    public void deletarEvento(@PathVariable int id) {
+    public ResponseEntity<Void> deletarEvento(@PathVariable int id) {
+        if (!eventoService.getEventoService(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
         eventoService.deletarEvento(id);
+        return ResponseEntity.noContent().build();
     }
 }
