@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -15,25 +16,35 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    // Público: listar todos os eventos
+    @PostMapping("/admin/eventos") 
+    public ResponseEntity<Evento> salvarEvento(@RequestBody Evento evento) {
+        Evento novoEvento = eventoService.salvarEvento(evento);
+        return ResponseEntity.ok(novoEvento); 
+    }
+
     @GetMapping("/public/eventos")
     public List<Evento> listarEventosPublicos() {
         return eventoService.listarEventos();
     }
 
-    // Admin: listar eventos
+    @GetMapping("/public/eventos/{id}")
+    public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
+        Optional<Evento> evento = eventoService.buscarPorId(id);
+        
+        return evento.map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/admin/eventos")
     public List<Evento> listarEventosAdmin() {
         return eventoService.listarEventos();
     }
 
-    // Admin: editar evento
     @PutMapping("/admin/eventos/{id}")
     public Evento atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
         return eventoService.atualizarEvento(id, eventoAtualizado);
     }
 
-    // Admin: deletar evento
     @DeleteMapping("/admin/eventos/{id}")
     public ResponseEntity<Void> deletarEvento(@PathVariable int id) {
         if (!eventoService.getEventoService(id).isPresent()) {

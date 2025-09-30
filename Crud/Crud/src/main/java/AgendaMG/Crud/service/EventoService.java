@@ -22,6 +22,10 @@ public class EventoService {
         return eventoRepository.save(evento);
     }
 
+    public Optional<Evento> buscarPorId(int id) {
+        return eventoRepository.findById(id);
+    }
+
     public Evento atualizarEvento(int id, Evento eventoAtualizado) {
         return eventoRepository.findById(id).map(evento -> {
             evento.setNomeEvento(eventoAtualizado.getNomeEvento());

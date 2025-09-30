@@ -13,9 +13,9 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     });
 
     if (response.ok) {
-      localStorage.setItem("auth", btoa(username + ":" + password)); // salva sessão
+      localStorage.setItem("auth", btoa(username + ":" + password)); 
       document.getElementById("msg").innerText = "Login bem-sucedido!";
-      window.location.href = "PainelADM.html"; // redireciona para painel
+      window.location.href = "PainelADM.html";
     } else {
       document.getElementById("msg").innerText = "Usuário ou senha inválidos!";
     }
