@@ -4,6 +4,7 @@ import AgendaMG.Crud.entity.Evento;
 import AgendaMG.Crud.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class EventoService {
 
     public Evento salvarEvento(Evento evento) {
         return eventoRepository.save(evento);
+    }
+
+    public Optional<Evento> buscarPorId(int id) {
+        return eventoRepository.findById(id);
     }
 
     public Evento atualizarEvento(int id, Evento eventoAtualizado) {
@@ -38,5 +43,9 @@ public class EventoService {
 
     public void deletarEvento(int id) {
         eventoRepository.deleteById(id);
+    }
+
+    public Optional<Evento> getEventoService(Integer id){
+        return eventoRepository.findById(id);
     }
 }
