@@ -1,4 +1,4 @@
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+document.getElementById("formLogin").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username").value;
@@ -13,13 +13,15 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     });
 
     if (response.ok) {
-      localStorage.setItem("auth", btoa(username + ":" + password)); 
-      document.getElementById("msg").innerText = "Login bem-sucedido!";
+      // salva credenciais e flag de sessão
+      localStorage.setItem("authHeader", "Basic " + btoa(username + ":" + password));
+      localStorage.setItem("isAdmin", "true");
+
       window.location.href = "PainelADM.html";
     } else {
-      document.getElementById("msg").innerText = "Usuário ou senha inválidos!";
+      document.getElementById("msg").innerText = "❌ Login inválido!";
     }
   } catch (error) {
-    document.getElementById("msg").innerText = "Erro ao conectar no servidor.";
+    document.getElementById("msg").innerText = "❌ Erro ao conectar ao servidor!";
   }
 });
