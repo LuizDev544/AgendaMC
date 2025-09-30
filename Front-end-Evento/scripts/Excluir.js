@@ -8,15 +8,11 @@ async function deletarEvento() {
 
     const url = `http://127.0.0.1:8080/api/admin/eventos/${id}`;
 
-    if (!confirm(`Tem certeza que deseja excluir o evento ${id}?`)) {
-        return;
-    }
-
     try {
         const resposta = await fetch(url, {
             method: 'DELETE',
             headers: {
-                'Authorization': 'Basic ' + btoa('admin:senha123') // substitua usuario:senha
+                'Authorization': 'Basic ' + btoa('admin:senha123')
             }
         });
 

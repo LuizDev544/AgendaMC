@@ -26,12 +26,6 @@ public class EventoController {
         return eventoService.listarEventos();
     }
 
-    // Admin: criar novo evento
-    @PostMapping("/admin/eventos")
-    public Evento criarEvento(@RequestBody Evento novoEvento) {
-        return eventoService.obterEventoPorId(novoEvento);
-    }
-
     // Admin: editar evento
     @PutMapping("/admin/eventos/{id}")
     public Evento atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
