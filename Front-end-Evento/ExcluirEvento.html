@@ -5,16 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Excluir Evento</title>
   <script src="scripts/Excluir.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/Excluir.css">
+
 </head>
 <body>
   <center>
-    <h1>-=-=-=-=-  Eventos -=-=-=-=-</h1>
+    <h1>Eventos</h1>
 
     <form id="deleteForm">
-      <label for="eventId">Insira o ID do evento:</label><br><br>
+      <p class="font-weight-normal" for="eventId" >Insira o ID do evento:</p><br><br>
       <input type="number" id="eventId" required>
-      <button type="submit" id="btnExcluir">Excluir Evento</button>
+      <br><br>
+      <div class="btnb-group btn-group-sm">
+        <button type="submit" class="btn btn-primary" id="btnExcluir">Excluir Evento</button>
+        <button type="button" class="btn btn-danger" id="Recarregar">Recarregar</button>
+      </div>
+
     </form>
+
+    <p id="mensagem"></p>
 
     <br>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1xI1LqxCGglcQZVVo_XEg-9r1zZ4tZfDE3A&s" width="300" height="300" alt="Eventos">

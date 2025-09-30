@@ -16,23 +16,24 @@ async function deletarEvento() {
             }
         });
 
-        if (resposta.status == 404) {
-            alert(`ID ${id} não encontrado.`);
+        if (resposta.status === 404) {
+            document.querySelector('#mensagem').innerText = "Evento não encontrado ❌";
         } else if (resposta.ok) {
-            alert(`Evento ${id} excluído com sucesso!`);
-            document.querySelector('#deleteForm').reset();
-        } else {
-            const erro = await resposta.text();
-            alert(`Erro ao excluir: ${erro}`);
+            document.querySelector('#mensagem').innerText = "Evento excluído com sucesso! ✅";
         }
-        
+
+        document.querySelector('#deleteForm').reset();
     } catch (erro) {
+        document.querySelector('#mensagem').innerText = "Esqueceu de iniciar a aplicação burro!";
         console.error(erro);
-        alert("Erro na requisição: " + erro.message);
     }
 }
 
 document.getElementById('deleteForm').addEventListener('submit', function (e) {
     e.preventDefault();
     deletarEvento();
+});
+
+document.getElementById('Recarregar').addEventListener('click', function () {
+    location.reload();
 });
