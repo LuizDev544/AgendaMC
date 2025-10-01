@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**", "/", "/index.html", "/login.html", "/scripts/**", "/styles/**", "/public/**", "/api/public/**"     
                 ).permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .anyRequest().authenticated() 
             )
 
             .formLogin(form -> form.disable())

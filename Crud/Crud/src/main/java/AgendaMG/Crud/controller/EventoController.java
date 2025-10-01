@@ -18,13 +18,13 @@ import AgendaMG.Crud.entity.Evento;
 import AgendaMG.Crud.service.EventoService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class EventoController {
 
     @Autowired
     private EventoService eventoService;
 
-    @PostMapping("/admin/eventos") 
+    @PostMapping("/eventos") 
     public ResponseEntity<Evento> salvarEvento(@RequestBody Evento evento) {
         Evento novoEvento = eventoService.salvarEvento(evento);
         return ResponseEntity.ok(novoEvento); 
@@ -42,12 +42,12 @@ public class EventoController {
         return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/admin/eventos")
+    @GetMapping("/eventos")
     public List<Evento> listarEventosAdmin() {
         return eventoService.listarEventos();
     }
 
-    @PutMapping("/admin/eventos/{id}")
+    @PutMapping("/eventos/{id}")
     public Evento atualizarEvento(@PathVariable int id, @RequestBody Evento eventoAtualizado) {
         return eventoService.atualizarEvento(id, eventoAtualizado);
     }
