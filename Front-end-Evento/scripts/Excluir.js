@@ -39,7 +39,3 @@ document.getElementById('deleteForm').addEventListener('submit', function (e) {
     e.preventDefault();
     deletarEvento();
 });
-
-document.getElementById('Recarregar').addEventListener('click', function () {
-    location.reload();
-});
