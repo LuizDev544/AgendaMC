@@ -12,7 +12,11 @@ async function deletarEvento() {
         const resposta = await fetch(url, {
             method: 'DELETE',
             headers: {
+<<<<<<< Updated upstream
                 'Authorization': 'Basic ' + btoa('admin:senha123')
+=======
+                'Authorization': 'Basic ' + btoa('admin:senha123') 
+>>>>>>> Stashed changes
             }
         });
 

@@ -18,6 +18,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start; 
+<<<<<<< Updated upstream
+    align-items: flex-start; 
+=======
+>>>>>>> Stashed changes
     min-height: 100vh;
     padding: 2rem 1rem;
     margin: 0;
@@ -28,7 +32,11 @@ body {
     padding: 2.5rem;
     border-radius: 0.75rem;
     box-shadow: var(--shadow);
+<<<<<<< Updated upstream
     max-width: 900px;
+=======
+    max-width: 900px; 
+>>>>>>> Stashed changes
     width: 100%;
 }
 
@@ -46,9 +54,15 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 1.5rem 2rem;
+<<<<<<< Updated upstream
+    gap: 1.5rem 2rem;
 }
 
 
+=======
+}
+
+>>>>>>> Stashed changes
 .full-width {
     grid-column: span 2;
 }
@@ -99,6 +113,10 @@ textarea {
     font-weight: bold;
     transition: background-color 0.3s ease;
     margin-top: 1rem;
+<<<<<<< Updated upstream
+    margin-top: 1rem;
+=======
+>>>>>>> Stashed changes
 }
 
 .btn-primary:hover {
