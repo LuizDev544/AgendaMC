@@ -1,64 +1,54 @@
-/* Variáveis para cores */
 :root {
-    /* Novas Cores */
-    --soft-blue: #639BF0;      /* Azul Suave para Cadastrar e Títulos */
-    --dark-gray: #495057;      /* Cinza Escuro para Excluir */
-    --light-gray: #E9ECEF;     /* Cinza Claro para Consultar */
-    
-    /* Cores de texto e fundo */
-    --text-color-dark: #343a40;
-    --text-color-light: #6c757d;
+    --primary-color: #d1410c;     
+    --primary-hover: #304fc9;      
+    --danger-color: #585163;  
+    --danger-hover: #1e0a3c;       
+    --info-color: #eeedf2;        
+    --info-hover: #d3d9e0;         
+    --background-color: #f8f7fa;  
+    --text-color-dark: #585163;    
+    --text-color-light: #6f7287;  
+    --text-color-light-bg: #495057; 
 }
 
-/* 1. Customização de Cores do Bootstrap */
-
-/* Cor primária para o título principal e cabeçalho da tabela */
-.text-primary { color: var(--soft-blue) !important; }
+.text-primary { color: var(--primary-color) !important; }
 .bg-primary { 
-    background-color: var(--soft-blue) !important; 
-    border-color: var(--soft-blue) !important;
+    background-color: var(--primary-color) !important; 
+    border-color: var(--primary-color) !important;
 }
 
-/* 2. Customização dos Botões de Ação */
-
-/* Botão de Cadastrar (Azul Suave) */
 .btn-success { 
-    background-color: var(--soft-blue) !important; 
-    border-color: var(--soft-blue) !important;
+    background-color: var(--primary-color) !important; 
+    border-color: var(--primary-color) !important;
     color: white !important;
 }
 .btn-success:hover {
-    background-color: #4A8AE6 !important; /* Azul ligeiramente mais escuro no hover */
-    border-color: #4A8AEF !important;
+    background-color: var(--primary-color) !important; 
+    border-color: var(--primary-color) !important;
 }
 
-/* Botão de Excluir (Cinza Escuro) */
 .btn-danger { 
-    background-color: var(--dark-gray) !important; 
-    border-color: var(--dark-gray) !important;
+    background-color: var(--danger-color) !important; 
+    border-color: var(--danger-color) !important;
     color: white !important;
 }
 .btn-danger:hover {
-    background-color: #343A40 !important; /* Cinza ainda mais escuro no hover */
-    border-color: #343A40 !important;
+    background-color: var(--danger-hover) !important;
+    border-color: var(--danger-hover) !important;
 }
 
-/* Botão de Consultar (Cinza Claro) */
 .btn-info { 
-    background-color: var(--light-gray) !important; 
-    border-color: var(--light-gray) !important;
-    color: var(--text-color-dark) !important; /* Texto escuro para contraste */
+    background-color: var(--info-color) !important; 
+    border-color: var(--info-color) !important;
+    color: var(--text-color-light-bg) !important; 
 }
 .btn-info:hover {
-    background-color: #D3D9E0 !important; /* Cinza ligeiramente mais escuro no hover */
-    border-color: #D3D9E0 !important;
+    background-color: var(--info-hover) !important;
+    border-color: var(--info-hover) !important;
 }
 
-/* ----------------------------------- */
-/* Estilos Gerais do Painel (Mantidos) */
-/* ----------------------------------- */
 body {
-    background-color: #f8f9fa; 
+    background-color: var(--background-color); 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -74,7 +64,6 @@ h2 {
     color: var(--text-color-light);
 }
 
-/* Barra de Ações (Botões) */
 .actions-bar {
     display: flex;
     gap: 10px;
@@ -99,19 +88,17 @@ h2 {
     transform: translateY(-2px);
 }
 
-/* Estilo da Tabela */
 .table-responsive {
     overflow-x: auto;
 }
 
 #eventTable thead th {
     font-weight: 700;
-    /* Manter fundo branco ou claro para cabeçalho secundário */
-    background-color: #f8f9fa; 
+    background-color: var(--background-color); 
     color: var(--text-color-dark);
     vertical-align: middle;
 }
 
 #eventTable tbody tr:hover {
-    background-color: #e9ecef;
+    background-color: #e9ecef; 
 }

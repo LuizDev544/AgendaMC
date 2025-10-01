@@ -8,35 +8,38 @@ async function deletarEvento() {
 
     const url = `http://127.0.0.1:8080/api/admin/eventos/${id}`;
 
-    if (!confirm(`Tem certeza que deseja excluir o evento ${id}?`)) {
-        return;
-    }
-
     try {
         const resposta = await fetch(url, {
             method: 'DELETE',
             headers: {
-                'Authorization': 'Basic ' + btoa('admin:senha123') // substitua usuario:senha
+                'Authorization': 'Basic ' + btoa('admin:senha123')
             }
         });
 
         if (resposta.ok) {
-            alert(`Evento ${id} excluído com sucesso!`);
-            document.querySelector('#deleteForm').reset();
-        } else if (resposta.status === 404) {
-            alert(`ID ${id} não encontrado.`);
-        } else {
-            const erro = await resposta.text();
-            alert(`Erro ao excluir: ${erro}`);
+            if (!confirm(`Tem certeza que deseja excluir o Evento ${id}?`)) {
+                return;
+            }
         }
+
+        if (resposta.status === 404) {
+            document.querySelector('#mensagem').innerText = "Evento não encontrado ❌";
+        } else if (resposta.ok) {
+            document.querySelector('#mensagem').innerText = "Evento excluído com sucesso! ✅";
+        }
+
+        document.querySelector('#deleteForm').reset();
     } catch (erro) {
+        document.querySelector('#mensagem').innerText = "Esqueceu de iniciar a aplicação burro! 🫏";
         console.error(erro);
-        alert("Erro na requisição: " + erro.message);
     }
 }
 
-// Intercepta o submit para não recarregar a página
 document.getElementById('deleteForm').addEventListener('submit', function (e) {
     e.preventDefault();
     deletarEvento();
+});
+
+document.getElementById('Recarregar').addEventListener('click', function () {
+    location.reload();
 });

@@ -31,8 +31,7 @@ public class EventoController {
     public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
         Optional<Evento> evento = eventoService.buscarPorId(id);
         
-        return evento.map(ResponseEntity::ok)
-                    .orElse(ResponseEntity.notFound().build());
+        return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/admin/eventos")
@@ -46,7 +45,12 @@ public class EventoController {
     }
 
     @DeleteMapping("/admin/eventos/{id}")
-    public void deletarEvento(@PathVariable int id) {
+    public ResponseEntity<Void> deletarEvento(@PathVariable int id) {
+        if (!eventoService.getEventoService(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
         eventoService.deletarEvento(id);
+        return ResponseEntity.noContent().build();
     }
 }
