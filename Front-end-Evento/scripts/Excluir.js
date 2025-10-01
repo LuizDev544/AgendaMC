@@ -16,6 +16,12 @@ async function deletarEvento() {
             }
         });
 
+        if (resposta.ok) {
+            if (!confirm(`Tem certeza que deseja excluir o Evento ${id}?`)) {
+                return;
+            }
+        }
+
         if (resposta.status === 404) {
             document.querySelector('#mensagem').innerText = "Evento não encontrado ❌";
         } else if (resposta.ok) {
