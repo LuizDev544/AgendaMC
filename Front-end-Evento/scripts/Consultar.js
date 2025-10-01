@@ -37,4 +37,43 @@ async function consultarEvento() {
     } catch (erro) {
         console.error(erro);
     }
+    async function editarEvento() {
+        const id = document.querySelector('#idevento').value.trim();
+        if (!id) {
+            alert("Id do evento não informado!");
+            return;
+        }
+
+        // Monta o objeto evento com os valores dos campos
+        const evento = {
+            nomeEvento: document.querySelector('#txtnome').value,
+            descricaoDoEvento: document.querySelector('#txtdescricao').value,
+            dataDoEvento: document.querySelector('#txtdataevento').value,
+            localDoEvento: document.querySelector('#txtlocal').value,
+            precoDoEvento: document.querySelector('#txtpreco').value,
+            capacidadeDePessoasNoEvento: document.querySelector('#txtcapacidade').value,
+            tipoDoEvento: document.querySelector('#txttipo').value,
+            apresentadorDoEvento: document.querySelector('#txtapresentador').value,
+            duracaoDoEvento: document.querySelector('#txtduracao').value
+        };
+
+        const url = `http://localhost:8080/api/admin/eventos/${id}`;
+        try {
+            const resposta = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa('admin:senha123')
+                },
+                body: JSON.stringify(evento)
+            });
+            if (resposta.status === 200) {
+                alert("Evento atualizado com sucesso!");
+            } else {
+                alert("Erro ao atualizar evento. Código: " + resposta.status);
+            }
+        } catch (e) {
+            alert("Erro ao atualizar evento: " + e);
+        }
+    }
 }

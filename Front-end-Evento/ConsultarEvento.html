@@ -5,77 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Evento</title>
     <link rel="stylesheet" href="../Front-end-Evento/styles/ConsultarEvento.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="consulta-bg">
-    <div class="main-wrapper">
-        <h1 class="page-title">Excluir Evento</h1>
-
-        <form class="search-form card" id="searchForm">
-            <div class="search-group">
-                <label for="idevento" class="search-label">Insira o ID do evento</label>
-                <input type="number" name="idevento" id="idevento" placeholder="Ex: 123" required>
+<body>
+    <h1>Consultando Evento</h1>
+    <form class="Formulaio" action="">
+        <label for="">Insira o ID do evento</label>
+        <input type="number" name="idevento" id="idevento">
+        <button id="meubotao" type="button" onclick="consultarEvento()">Consultar Evento</button>
+        <button id="meubotaotwo" type="button">
+            <a href="../Front-end-Evento/PainelADM.html">Voltar</a>
+        </button>
+        <div id="resultado" class="main-div">
+            <p>Dados do Evento</p>
+            <div>
+                <label for="txtnome">Nome do Evento</label>
+                <input type="text" name="txtnome" id="txtnome">
             </div>
-            <button id="meubotao" type="button" class="btn-primary" onclick="consultarEvento()">
-                <i data-feather="search" class="icon-small"></i> Consultar Evento
-            </button>
-            <button id="meubotao" type="button" class="btn-primary">
-                <i data-feather="search" class="bi bi-box-arrow-left"></i>
-                <a href="PainelADM.html">Voltar</a> 
-            </button>
-        </form>
-                <div class="form-group">
-                    <label for="txtnome">Nome do Evento</label>
-                    <input type="text" name="txtnome" id="txtnome">
-                </div>
-
-                <div class="form-group full-width">
-                    <label for="txtdescricao">Descrição do evento</label>
-                    <input type="text" name="txtdescricao" id="txtdescricao" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtdataevento">Data do Evento</label>
-                    <input type="date" name="txtdataevento" id="txtdataevento" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtlocal">Local do Evento</label>
-                    <input type="text" name="txtlocal" id="txtlocal" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtpreco">Preço do evento</label>
-                    <input type="number" name="txtpreco" id="txtpreco" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtcapacidade">Capacidade P/Pessoa</label>
-                    <input type="number" name="txtcapacidade" id="txtcapacidade" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txttipo">Tipo do evento</label>
-                    <input type="text" name="txttipo" id="txttipo" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtapresentador">Apresentador</label>
-                    <input type="text" name="txtapresentador" id="txtapresentador" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label for="txtduracao">Duração do evento</label>
-                    <input type="text" name="txtduracao" id="txtduracao" readonly>
-                </div>
-
-        <p id="msg-consulta" class="message-status"></p>
-    </div>
-    
-    <script>
-        feather.replace(); 
-    </script>
+            <div>
+                <label for="txtdescricao">Descrição do evento</label>
+                <input type="text" name="txtdescricao" id="txtdescricao">
+            </div>
+            <div>
+                <label for="txtdataevento">Data do Evento</label>
+                <input type="date" name="txtdataevento" id="txtdataevento">
+            </div>
+            <div>
+                <label for="txtlocal">Local do Evento</label>
+                <input type="text" name="txtlocal" id="txtlocal">
+            </div>
+            <div>
+                <label for="txtpreco">Preço do evento</label>
+                <input type="number" name="txtpreco" id="txtpreco">
+            </div>
+            <div>
+                <label for="txtcapacidade">Capacidade P/Pessoa</label>
+                <input type="number" name="txtcapacidade" id="txtcapacidade">
+            </div>
+            <div>
+                <label for="txttipo">Tipo do evento</label>
+                <input type="text" name="txttipo" id="txttipo">
+            </div>
+            <div>
+                <label for="txtapresentador">Apresentador</label>
+                <input type="text" name="txtapresentador" id="txtapresentador">
+            </div>
+            <div>
+                <label for="txtduracao">Duração do evento</label>
+                <input type="text" name="txtduracao" id="txtduracao">
+            </div>
+        </div>
+    </form>
     <script src="scripts/Consultar.js"></script>
 </body>
 </html>
