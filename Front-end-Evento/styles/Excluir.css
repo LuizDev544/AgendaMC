@@ -7,8 +7,8 @@
     --text-dark: #585163;
     --input-bg-readonly: #eeedf2;
     --primary-color: #3659e3;
-    --primary-hover: #304fc9;
-    --error-color: #d1410c; 
+    --primary-hover: #ff0000;
+    --error-color: rgb(255, 56, 56); 
 
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
