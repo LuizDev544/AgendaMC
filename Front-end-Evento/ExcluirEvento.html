@@ -12,24 +12,22 @@
 <body>
   <center>
     <h1>Excluir Evento</h1>
-    <form id="deleteForm">
-      <br><br>
-      <p class="font-weight-normal" for="eventId" >Insira o ID do evento:</p><br><br>
-      <input type="number" id="eventId" required>
 
-      <br><br>
+    <form class="search-form card" id="deleteForm">
+        <div class="search-group">
+            <label for="idevento" class="search-label">Insira o ID do Evento</label>
+            <input type="number" name="idevento" id="eventId" placeholder="Ex: 123" required>
+        </div>
 
-      <div class="btnb-group btn-group-sm">
-        <button type="submit" class="btn btn-primary" id="btnExcluir">Excluir Evento</button>
-        <button type="button" class="btn btn-danger" id="Recarregar">Recarregar</button>
-      </div>
+        <button id="btnExcluir" type="submit" class="btn-primary">
+          <i data-feather="search" class="icon-small"></i> Excluir Evento
+        </button>
 
+        <b id="mensagem"></b>
     </form>
 
-    <p id="mensagem"></p>
-    
-    <br>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1xI1LqxCGglcQZVVo_XEg-9r1zZ4tZfDE3A&s" width="300" height="300" alt="Eventos">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1xI1LqxCGglcQZVVo_XEg-9r1zZ4tZfDE3A&s" width="75" height="75" alt="Eventos">
   </center>
 </body>
 </html>
