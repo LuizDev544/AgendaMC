@@ -25,6 +25,7 @@ function criarBotaoEditar(linha) {
 
         form.classList.add('show');
         document.getElementById('formEdicao').style.display = 'block';
+        form.classList.add('show');
     });
 
     return btn;
