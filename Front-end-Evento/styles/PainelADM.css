@@ -1,0 +1,108 @@
+    body {
+      background: linear-gradient(135deg, #f9fafb, #eef2f7);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header h1 {
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-action {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      border-radius: 12px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    table th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table td {
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    #formEdicao {
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-top: 1px solid #e3e6ea;
+    }
+
+    #formEdicao label {
+      margin-top: 0.6rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    #formEdicao input {
+      margin-bottom: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      padding: 0.5rem;
+      width: 100%;
+    }
+
+    #formEdicao button {
+      margin-top: 1rem;
+      width: 100%;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    #msgEdicao {
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    thead.custom-header {
+        background-color: #d1410c;
+        color: white; 
+    }
+
+    .card-header.custom-orange {
+        background-color: #d1410c;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+
+    #formEdicao {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0 1.5rem;
+    }
+
+    #formEdicao.show {
+        max-height: 1000px;
+        padding: 1.5rem;
+    }
