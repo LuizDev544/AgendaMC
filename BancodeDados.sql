@@ -11,17 +11,18 @@ drop table usuarios;
 
 INSERT INTO Eventos 
 (nome_evento, descricao_do_evento, data_do_evento, local_do_evento, preco_do_evento, 
- capacidade_de_pessoas_no_evento, tipo_do_evento, apresentador_do_evento, duracao_do_evento)
+capacidade_de_pessoas_no_evento, tipo_do_evento, apresentador_do_evento, duracao_do_evento)
 VALUES 
 ('Show de Rock', 
- 'Apresentação da banda RockStars com músicas clássicas e autorais.', 
- '2025-11-15', 
- 'Arena São Paulo', 
- 150.00, 
- 5000, 
- 'Show Musical', 
- 'Banda RockStars', 
- '3 horas');
+    'Apresentação da banda RockStars com músicas clássicas e autorais.', 
+    '2025-11-15', 
+    'Arena São Paulo', 
+    150.00, 
+    500, 
+    'Show Musical', 
+    'Banda RockStars', 
+    '3 horas'
+);
 
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
