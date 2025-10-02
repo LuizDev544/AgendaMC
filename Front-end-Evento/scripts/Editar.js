@@ -23,8 +23,7 @@ function criarBotaoEditar(linha) {
         document.getElementById('inputApresentador').value = linha.children[8].textContent;
         document.getElementById('inputDuracao').value = linha.children[9].textContent;
 
-       
-        document.getElementById('formEdicao').style.display = 'block';
+        form.classList.add('show');
     });
 
     return btn;

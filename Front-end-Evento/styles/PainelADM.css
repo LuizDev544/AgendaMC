@@ -95,6 +95,13 @@
         letter-spacing: 0.5px;
     }
 
+    .display-5.fw-bold.texto-laranja {
+        color: #d1410c;
+        font-weight: bold;
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+
     #formEdicao {
         max-height: 0;
         overflow: hidden;
