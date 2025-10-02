@@ -16,8 +16,6 @@ function criarBotaoEditar(linha) {
         document.getElementById('inputTipo').value = linha.children[7].textContent;
         document.getElementById('inputApresentador').value = linha.children[8].textContent;
         document.getElementById('inputDuracao').value = linha.children[9].textContent;
-
-       
         document.getElementById('formEdicao').style.display = 'block';
     });
     return btn;

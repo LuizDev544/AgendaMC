@@ -17,7 +17,6 @@ async function consultarEvento() {
         return;
     }
 
-    // URL ajustada para o backend atual
     const url = `http://localhost:8080/api/admin/public/eventos/${id}`;
     
     try {
@@ -47,7 +46,6 @@ async function editarEvento() {
         return;
     }
 
-    // Monta o objeto evento com os valores dos campos
     const evento = {
         nomeEvento: document.querySelector('#txtnome').value,
         descricaoDoEvento: document.querySelector('#txtdescricao').value,
