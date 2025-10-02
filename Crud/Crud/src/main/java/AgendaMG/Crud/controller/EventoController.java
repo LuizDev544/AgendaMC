@@ -54,7 +54,7 @@ public class EventoController {
         return eventoService.atualizarEvento(id, eventoAtualizado);
     }
 
-    @DeleteMapping("/admin/eventos/{id}")
+    @DeleteMapping("/eventos/{id}")
     public ResponseEntity<Void> deletarEvento(@PathVariable int id) {
         if (!eventoService.getEventoService(id).isPresent()) {
             return ResponseEntity.notFound().build();

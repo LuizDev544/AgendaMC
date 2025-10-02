@@ -1,12 +1,18 @@
-
 function criarBotaoEditar(linha) {
     const btn = document.createElement('button');
     btn.textContent = 'Editar';
     btn.className = 'btn btn-warning btn-sm';
+
     btn.addEventListener('click', () => {
-        const id = linha.dataset.id;
-        
-        document.getElementById('inputId').value = id;
+        const form = document.getElementById('formEdicao');
+        const idAtual = document.getElementById('inputId').value;
+
+        if (form.classList.contains('show') && idAtual == linha.dataset.id) {
+            form.classList.remove('show');
+            return;
+        }
+
+        document.getElementById('inputId').value = linha.dataset.id;
         document.getElementById('inputNome').value = linha.children[1].textContent;
         document.getElementById('inputDescricao').value = linha.children[2].textContent;
         document.getElementById('inputData').value = linha.children[3].textContent;
@@ -17,12 +23,11 @@ function criarBotaoEditar(linha) {
         document.getElementById('inputApresentador').value = linha.children[8].textContent;
         document.getElementById('inputDuracao').value = linha.children[9].textContent;
 
-       
-        document.getElementById('formEdicao').style.display = 'block';
+        form.classList.add('show');
     });
+
     return btn;
 }
-
 
 async function carregarEventos() {
     try {
@@ -60,9 +65,9 @@ async function carregarEventos() {
     }
 }
 
-
 document.getElementById("formEdicao").addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const id = document.getElementById("inputId").value;
     const eventoAtualizado = {
         nomeEvento: document.getElementById("inputNome").value,
@@ -80,23 +85,25 @@ document.getElementById("formEdicao").addEventListener("submit", async (e) => {
         const res = await fetch(`http://localhost:8080/api/admin/eventos/${id}`, {
             method: "PUT",
             headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Basic " + btoa("admin:senha123")
+                "Content-Type": "application/json",
+                "Authorization": "Basic " + btoa("admin:senha123")
             },
             body: JSON.stringify(eventoAtualizado)
         });
 
         if (!res.ok) throw new Error("Erro ao atualizar evento");
 
-        document.getElementById("msgEdicao").innerText = "Evento atualizado com sucesso!";
-        document.getElementById("formEdicao").style.display = "none";
+        document.getElementById("msgEdicao").innerText = "Evento atualizado com sucesso! ✅";
+
+        const form = document.getElementById("formEdicao");
+        form.classList.remove('show');
+
         carregarEventos(); 
     } catch (err) {
         console.error(err);
         document.getElementById("msgEdicao").innerText = "Falha ao atualizar evento!";
     }
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
     carregarEventos();
