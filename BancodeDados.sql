@@ -5,9 +5,11 @@ create table Eventos;
 
 select * from Eventos;
 
-select * from usuarios;
+select * from admin;
 
 drop table usuarios;
+
+drop table admin;
 
 INSERT INTO Eventos 
 (nome_evento, descricao_do_evento, data_do_evento, local_do_evento, preco_do_evento, 
@@ -24,18 +26,16 @@ VALUES
     '3 horas'
 );
 
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(255) NOT NULL,
-    role ENUM('ADMIN', 'USER') DEFAULT 'USER'
+INSERT INTO admin (email, senha, nome) VALUES
+('admin@agendamg.com', '$2a$12$WYdbsGjlIIl2ja9qxVQgE.nz3.blEyFcp5OgXPovHh7hXTMjir/JW', 'Administrador Principal');
+
+create table IF NOT EXISTS admin (
+    id int auto_increment primary key,
+    email varchar(255) not null unique,
+    senha varchar(255) not null,
+    nome varchar(255) not null,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ativo BOOLEAN DEFAULT TRUE,
+    
+    INDEX idx_email (email)
 );
-
-INSERT INTO usuarios (email, senha, role)
-VALUES ('Admin@gmail.com', '$2a$10$MkOOugHH5rf63pvdrHZL5euEsqKuiLJckZE9Mqm.Ksxg3IFd2ugmq', 'ADMIN');
-
-UPDATE usuarios
-SET role = 'ROLE_ADMIN'
-WHERE role = 'ADMIN';
-
-UPDATE usuarios SET role = 'ROLE_ADMIN' WHERE email = 'Admin@gmail.com';
