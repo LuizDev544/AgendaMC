@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
+    const msg = document.getElementById("msg");
+
+    // 🔧 REMOVER: Verificação automática de token no login
+    // Isso estava causando o loop
+    // const token = localStorage.getItem('jwtToken');
+    // if (token) {
+    //     console.log("Usuário já possui token, validando...");
+    //     validarTokenERedirecionar(token);
+    // }
 
     if (!form) {
         console.error("Formulário de login não encontrado!");
@@ -15,39 +24,54 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch("http://localhost:8080/auth/login", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, senha }),
-                credentials: "include" 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, senha })
             });
 
-            const data = await response.json();
-
-            // 📢 PASSO 3 DE VERIFICAÇÃO: Veja o valor exato no console.
             console.log("Status da Resposta:", response.status);
-            console.log("Role recebida do servidor:", data.role);
 
-
-            if (response.ok) {
-                alert(data.message);
-
-                // 1. Converte a role para maiúscula (para evitar problemas de caixa)
-                const userRole = data.role ? data.role.toUpperCase() : null;
-
-                // 2. Lógica de Redirecionamento 
-                if (userRole === "ADMIN") {
-                    // ✅ REDIRECIONAMENTO EXCLUSIVO PARA ADMIN
-                    window.location.href = "PainelADM.html";
-                } else {
-                    // ✅ Redirecionamento para qualquer outro usuário (ou caso a role seja nula)
-                    window.location.href = "PainelUsuario.html";
-                }
-
-            } else {
-                alert("Erro no login: " + data.message);
+            if (!response.ok) {
+                throw new Error("Falha no login. Verifique suas credenciais.");
             }
-        } catch (error) {
-            console.error("Erro na requisição:", error);
-            alert("Falha de conexão com o servidor. Verifique a URL.");
+
+            const data = await response.json();
+            console.log("Dados recebidos JWT:", data);
+
+            if (data.authenticated && data.token) {
+                // ✅ ARMAZENAR TOKEN JWT no localStorage
+                localStorage.setItem('jwtToken', data.token);
+                localStorage.setItem('userData', JSON.stringify({
+                    usuario: data.usuario,
+                    role: data.role
+                }));
+
+                msg.textContent = "✅ Login realizado com sucesso!";
+                msg.style.color = "green";
+                
+                // Redireciona para o painel ADMIN
+                setTimeout(() => {
+                    window.location.href = "PainelADM.html";
+                }, 1000);
+                
+            } else {
+                msg.textContent = "❌ Credenciais inválidas!";
+                msg.style.color = "red";
+            }
+        } catch (err) {
+            console.error("Erro no login:", err);
+            msg.textContent = "⚠️ Erro de conexão com o servidor.";
+            msg.style.color = "red";
         }
     });
+
+    // 🔧 REMOVER: função validarTokenERedirecionar - causa loop
 });
+
+// 🔧 ADICIONAR: Limpar tokens manualmente se necessário
+function limparTokens() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userData');
+    console.log("Tokens limpos manualmente");
+}

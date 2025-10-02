@@ -1,69 +1,104 @@
-document.getElementById("formCadastro").addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", async () => {
+    const form = document.getElementById("formCadastro");
+    const msg = document.getElementById("msg");
 
-  const msgElement = document.getElementById("msg");
+    if (!form) {
+        console.error("Formulário de cadastro de evento não encontrado!");
+        return;
+    }
 
-  try {
-    const nomeEvento = document.getElementById("nomeEvento").value;
-    const descricaoDoEvento = document.getElementById("descricaoDoEvento").value;
-    const dataDoEvento = document.getElementById("dataDoEvento").value;
-    const localDoEvento = document.getElementById("localDoEvento").value;
-    const precoDoEvento = Number(document.getElementById("precoDoEvento").value);
-    const capacidadeDePessoasNoEvento = Number(document.getElementById("capacidadeDePessoasNoEvento").value);
-    const tipoDoEvento = document.getElementById("tipoDoEvento").value;
-    const apresentadorDoEvento = document.getElementById("apresentadorDoEvento").value;
-    const duracaoDoEvento = document.getElementById("duracaoDoEvento").value;
+    // 🔑 Verifica se o usuário está logado via JWT
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+        msg.textContent = "⚠️ Você não está logado. Faça login novamente.";
+        msg.style.color = "red";
+        window.location.href = "Login.html";
+        return;
+    }
 
+    try {
+        const resp = await fetch("http://localhost:8080/auth/validate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ token: token })
+        });
 
-    if (isNaN(precoDoEvento) || isNaN(capacidadeDePessoasNoEvento)) {
-      msgElement.innerText = "Erro: Preço e Capacidade devem ser números válidos.";
-      return;
-    }
-    
-    // 🚨 CORREÇÃO IMPLEMENTADA: Removemos a autenticação Basic desnecessária.
-    const response = await fetch("http://localhost:8080/api/admin/eventos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            // O header Authorization foi removido, confiando no cookie JSESSIONID.
-        },
-        credentials: "include", // ✅ O NAVEGADOR DEVE ENVIAR O COOKIE AGORA COM SameSite=Lax
-        body: JSON.stringify({
-            nomeEvento,
-            descricaoDoEvento,
-            dataDoEvento,
-            localDoEvento,
-            precoDoEvento,
-            capacidadeDePessoasNoEvento,
-            tipoDoEvento,
-            apresentadorDoEvento,
-            duracaoDoEvento
-        })
-    });
+        const validationData = await resp.json();
+        
+        if (!validationData.valid || validationData.role !== "ROLE_ADMIN") {
+            msg.textContent = "❌ Você não tem permissão para cadastrar eventos.";
+            msg.style.color = "red";
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('userData');
+            window.location.href = "Login.html";
+            return;
+        }
 
-    if (response.ok) {
-      msgElement.innerText = "Evento cadastrado com sucesso!";
-      document.getElementById("formCadastro").reset();
-    } else {
+        console.log("Usuário autenticado:", validationData.usuario, "Role:", validationData.role);
+        
+    } catch (err) {
+        console.error("Erro ao validar token:", err);
+        msg.textContent = "⚠️ Erro de conexão ao verificar autenticação.";
+        msg.style.color = "red";
+        return;
+    }
 
-      let errorMessage = "Erro ao cadastrar evento!";
+    // 🔑 Cadastro do evento com JWT
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        const errorData = await response.json();
-        errorMessage = errorData.message || JSON.stringify(errorData);
-      } else if (response.status === 403) {
-        errorMessage = "Acesso Negado. Verifique sua permissão de ADMIN. (403)";
-      } else if (response.status === 401) { 
-        errorMessage = "Sessão expirada ou usuário não logado. Por favor, faça login novamente. (401)";
-      } else if (response.status === 400) {
-        errorMessage = "Dados Inválidos. Verifique se todos os campos estão preenchidos corretamente. (400)";
-      }
+        const evento = {
+            nomeEvento: document.getElementById("nomeEvento").value,
+            descricaoDoEvento: document.getElementById("descricaoDoEvento").value,
+            dataDoEvento: document.getElementById("dataDoEvento").value,
+            localDoEvento: document.getElementById("localDoEvento").value,
+            precoDoEvento: parseFloat(document.getElementById("precoDoEvento").value),
+            capacidadeDePessoasNoEvento: parseInt(document.getElementById("capacidadeDePessoasNoEvento").value),
+            tipoDoEvento: document.getElementById("tipoDoEvento").value,
+            apresentadorDoEvento: document.getElementById("apresentadorDoEvento").value,
+            duracaoDoEvento: document.getElementById("duracaoDoEvento").value
+        };
 
-      msgElement.innerText = `Erro (${response.status}): ${errorMessage}`;
-    }
-  } catch (error) {
-    console.error("Erro na requisição ou processamento:", error);
-    msgElement.innerText = "Falha de conexão. Verifique se o servidor está ativo.";
-  }
+        try {
+            const token = localStorage.getItem('jwtToken');
+            const response = await fetch("http://localhost:8080/api/admin/eventos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` // ✅ HEADER JWT
+                },
+                body: JSON.stringify(evento)
+                // 🔄 REMOVIDO: credentials: "include"
+            });
+
+            if (!response.ok) {
+                if (response.status === 403) {
+                    throw new Error("Acesso negado. Token expirado ou inválido.");
+                }
+                throw new Error("Erro ao cadastrar evento.");
+            }
+
+            const data = await response.json();
+            console.log("Evento cadastrado:", data);
+
+            msg.textContent = "✅ Evento cadastrado com sucesso!";
+            msg.style.color = "green";
+            form.reset();
+        } catch (err) {
+            console.error("Erro ao cadastrar evento:", err);
+            msg.textContent = "⚠️ " + err.message;
+            msg.style.color = "red";
+            
+            // Se foi erro de autenticação, redireciona para login
+            if (err.message.includes("Acesso negado") || err.message.includes("Token")) {
+                localStorage.removeItem('jwtToken');
+                localStorage.removeItem('userData');
+                setTimeout(() => {
+                    window.location.href = "Login.html";
+                }, 2000);
+            }
+        }
+    });
 });

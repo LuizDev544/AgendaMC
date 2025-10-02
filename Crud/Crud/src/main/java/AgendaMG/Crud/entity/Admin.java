@@ -1,4 +1,5 @@
 package AgendaMG.Crud.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,8 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "admin")
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +30,10 @@ public class Usuario {
     private String senha;
 
     @Column(nullable = false)
-    private String role; 
+    private String nome;
 
-    public String getRole() {
-        return this.role;
-    }
+    @Column(nullable = false)
+    private String role = "ROLE_ADMIN"; // Valor padrão
 
+    // Remover o getRole() se estiver usando Lombok
 }

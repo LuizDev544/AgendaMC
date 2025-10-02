@@ -17,7 +17,7 @@
         
         <form id="loginForm">
             <input type="email" id="email" placeholder="Email" required>
-            <input type="senha" id="senha" placeholder="Senha" required>
+            <input type="password" id="senha" placeholder="Senha" required>
             <button type="submit" class="btn-primary">Entrar</button>
         </form>
 
@@ -27,6 +27,12 @@
     <script src="../Front-end-Evento/scripts/Login.js"></script>
     <script>
         feather.replace(); 
+    </script>
+
+    <script>
+    console.log("Login.html carregado");
+    console.log("Token no localStorage:", localStorage.getItem('jwtToken'));
+    console.log("UserData no localStorage:", localStorage.getItem('userData'));
     </script>
 </body>
 </html>

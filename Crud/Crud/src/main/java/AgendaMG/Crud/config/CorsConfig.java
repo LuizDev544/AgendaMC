@@ -1,4 +1,3 @@
-// Código do CorsConfig.java permanece o mesmo.
 package AgendaMG.Crud.config;
 
 import java.util.List;
@@ -11,25 +10,29 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class CorsConfig {
-@Bean
-public CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration config = new CorsConfiguration();
 
-    // 🔹 Permite requisições do seu front
-    config.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:8080"));
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
 
-    // 🔹 Métodos liberados
-    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // URLs do front-end que podem chamar o backend
+        config.setAllowedOrigins(List.of(
+            "http://127.0.0.1:5500",
+            "http://localhost:5500"
+        ));
 
-    // 🔹 Headers permitidos
-    config.setAllowedHeaders(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
 
-    // 🔹 Permite envio de cookies (JSESSIONID)
-    config.setAllowCredentials(true);
+        // 🔑 Fundamental para enviar cookies JSESSIONID
+        config.setAllowCredentials(true);
 
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", config);
+        // expõe o Set-Cookie pro navegador aceitar
+        config.setExposedHeaders(List.of("Set-Cookie", "Authorization"));
 
-    return source;
-  }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
+    }
 }

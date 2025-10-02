@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Administração</title>
-    <script src="../Front-end-Evento/scripts/Protection.js"></script>
-    <script src="../Front-end-Evento/scripts/Logout.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
     <link rel="stylesheet" href="../Front-end-crudevento/styles/PainelADM.css">
+    <script src="../Front-end-Evento/scripts/Protection.js"></script>
 </head>
 <body class="bg-light">
     <div class="container-fluid py-4 dashboard-container">
@@ -30,10 +29,6 @@
             </a>
 
             <button onclick="logout()">Sair</button>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         </div>
 
         <div class="card shadow-sm">
@@ -70,7 +65,14 @@
     <script>
         feather.replace();
     </script>
-    
-    <script src="../Front-end-crudevento/scripts/PainelADM.js"></script>
+    <script src="../Front-end-Evento/scripts/authCheck.js"></script>
+    <script src="../Front-end-Evento/scripts/PainelADM.js"></script>
+        <script>
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('userData');
+            window.location.href = "Login.html";
+        }
+    </script>
 </body>
 </html>

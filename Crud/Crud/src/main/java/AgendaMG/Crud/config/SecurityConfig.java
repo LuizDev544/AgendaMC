@@ -1,56 +1,68 @@
-// Código do SecurityConfig.java permanece o mesmo.
 package AgendaMG.Crud.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import AgendaMG.Crud.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-      .csrf(AbstractHttpConfigurer::disable) // 1. DESATIVA CSRF
-      .cors(cors -> {}) // 2. Habilita CORS (referencia CorsConfig.java)
-      
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/auth/**", "/", "/index.html", "/login.html", "/scripts/**", "/styles/**").permitAll() 
-        .requestMatchers("/api/admin/**").hasRole("ADMIN") // 🚨 REGRA CRÍTICA DE AUTORIZAÇÃO
-        .anyRequest().authenticated()
-      )
-      .sessionManagement(session -> session
-        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) 
-        .maximumSessions(1)
-      )
-      .formLogin(AbstractHttpConfigurer::disable)
-      .httpBasic(AbstractHttpConfigurer::disable)
-      .logout(logout -> logout
-        .logoutUrl("/auth/logout")
-        .invalidateHttpSession(true)
-        .deleteCookies("JSESSIONID")
-        .logoutSuccessUrl("/login.html") 
-      );
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    return http.build();
-  }
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-return new BCryptPasswordEncoder();
-}
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .cors(Customizer.withDefaults())
+            
+            // ✅ MUDANÇA CRÍTICA: Stateless com JWT
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
 
-@Bean
-public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-return config.getAuthenticationManager();
-}
+            // ✅ Rotas públicas (mantidas)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/auth/**", "/", "/index.html", "/login.html",
+                    "/scripts/**", "/styles/**", "/public/**",
+                    "/api/public/**"
+                ).permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
+
+            // ✅ Filtro JWT em vez de sessão
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }
