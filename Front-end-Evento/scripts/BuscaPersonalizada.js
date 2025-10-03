@@ -37,7 +37,6 @@ async function ConsultarTipoEvento() {
     }
 }
 
-
 async function carregarEventos() {
 
 }
