@@ -15,7 +15,6 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // URLs do front-end que podem chamar o backend
         config.setAllowedOrigins(List.of(
             "http://127.0.0.1:5500",
             "http://localhost:5500"
@@ -24,10 +23,8 @@ public class CorsConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
 
-        // 🔑 Fundamental para enviar cookies JSESSIONID
         config.setAllowCredentials(true);
 
-        // expõe o Set-Cookie pro navegador aceitar
         config.setExposedHeaders(List.of("Set-Cookie", "Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
