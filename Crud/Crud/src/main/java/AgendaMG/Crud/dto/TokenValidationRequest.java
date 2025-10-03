@@ -1,21 +1,14 @@
 package AgendaMG.Crud.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TokenValidationRequest {
     private String token;
-
-    // Construtores
-    public TokenValidationRequest() {}
-
-    public TokenValidationRequest(String token) {
-        this.token = token;
-    }
-
-    // Getters e Setters
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

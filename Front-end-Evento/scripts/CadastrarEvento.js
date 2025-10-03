@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // 🔑 Verifica se o usuário está logado via JWT
     const token = localStorage.getItem('jwtToken');
     if (!token) {
-        msg.textContent = "⚠️ Você não está logado. Faça login novamente.";
+        msg.textContent = "Você não está logado. Faça login novamente.";
         msg.style.color = "red";
         window.location.href = "Login.html";
         return;
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const validationData = await resp.json();
         
         if (!validationData.valid || validationData.role !== "ROLE_ADMIN") {
-            msg.textContent = "❌ Você não tem permissão para cadastrar eventos.";
+            msg.textContent = "Você não tem permissão para cadastrar eventos.";
             msg.style.color = "red";
             localStorage.removeItem('jwtToken');
             localStorage.removeItem('userData');
@@ -40,12 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         
     } catch (err) {
         console.error("Erro ao validar token:", err);
-        msg.textContent = "⚠️ Erro de conexão ao verificar autenticação.";
+        msg.textContent = "Erro de conexão ao verificar autenticação.";
         msg.style.color = "red";
         return;
     }
 
-    // 🔑 Cadastro do evento com JWT
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -67,10 +65,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}` // ✅ HEADER JWT
+                    "Authorization": `Bearer ${token}` 
                 },
                 body: JSON.stringify(evento)
-                // 🔄 REMOVIDO: credentials: "include"
             });
 
             if (!response.ok) {
@@ -83,12 +80,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await response.json();
             console.log("Evento cadastrado:", data);
 
-            msg.textContent = "✅ Evento cadastrado com sucesso!";
+            msg.textContent = "Evento cadastrado com sucesso!";
             msg.style.color = "green";
             form.reset();
         } catch (err) {
             console.error("Erro ao cadastrar evento:", err);
-            msg.textContent = "⚠️ " + err.message;
+            msg.textContent = "Erro: " + err.message;
             msg.style.color = "red";
             
             // Se foi erro de autenticação, redireciona para login

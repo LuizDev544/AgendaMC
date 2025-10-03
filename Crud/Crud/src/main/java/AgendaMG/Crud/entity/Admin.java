@@ -22,18 +22,13 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column(nullable = false, unique = true)
     private String email;
-
     @Column(nullable = false)
     private String senha;
-
     @Column(nullable = false)
     private String nome;
-
     @Column(nullable = false)
-    private String role = "ROLE_ADMIN"; // Valor padrão
+    private String role = "ROLE_ADMIN";
 
-    // Remover o getRole() se estiver usando Lombok
 }

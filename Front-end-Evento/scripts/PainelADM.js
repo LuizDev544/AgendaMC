@@ -41,7 +41,6 @@ async function carregarDashboard() {
 }
 
 function atualizarDashboard(eventos) {
-    // Atualizar estatísticas
     const totalEventos = eventos.length;
     const eventosFuturos = eventos.filter(evento => 
         new Date(evento.dataDoEvento) >= new Date()
@@ -56,7 +55,6 @@ function atualizarDashboard(eventos) {
     document.getElementById('receitaEstimada').textContent = 
         `R$ ${receitaEstimada.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 
-    // Atualizar lista de eventos
     const listaEventos = document.getElementById('listaEventos');
     if (eventos.length > 0) {
         listaEventos.innerHTML = eventos.slice(0, 5).map(evento => `

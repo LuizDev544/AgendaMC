@@ -82,8 +82,8 @@ create table IF NOT EXISTS admin (
     email varchar(255) not null unique,
     senha varchar(255) not null,
     nome varchar(255) not null,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    ativo BOOLEAN DEFAULT TRUE,
+    data_criacao timestamp default CURRENT_TIMESTAMP,
+    ativo boolean default TRUE,
     
     INDEX idx_email (email)
 );

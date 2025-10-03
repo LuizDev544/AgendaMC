@@ -2,14 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
     const msg = document.getElementById("msg");
 
-    // 🔧 REMOVER: Verificação automática de token no login
-    // Isso estava causando o loop
-    // const token = localStorage.getItem('jwtToken');
-    // if (token) {
-    //     console.log("Usuário já possui token, validando...");
-    //     validarTokenERedirecionar(token);
-    // }
-
     if (!form) {
         console.error("Formulário de login não encontrado!");
         return;
@@ -40,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Dados recebidos JWT:", data);
 
             if (data.authenticated && data.token) {
-                // ✅ ARMAZENAR TOKEN JWT no localStorage
                 localStorage.setItem('jwtToken', data.token);
                 localStorage.setItem('userData', JSON.stringify({
                     usuario: data.usuario,
@@ -50,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 msg.textContent = "✅ Login realizado com sucesso!";
                 msg.style.color = "green";
                 
-                // Redireciona para o painel ADMIN
+
                 setTimeout(() => {
                     window.location.href = "PainelADM.html";
                 }, 1000);
@@ -61,15 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (err) {
             console.error("Erro no login:", err);
-            msg.textContent = "⚠️ Erro de conexão com o servidor.";
+            msg.textContent = "Erro de conexão com o servidor.";
             msg.style.color = "red";
         }
     });
-
-    // 🔧 REMOVER: função validarTokenERedirecionar - causa loop
 });
 
-// 🔧 ADICIONAR: Limpar tokens manualmente se necessário
 function limparTokens() {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('userData');

@@ -4,7 +4,7 @@ async function protegerRota(roleRequerido = null) {
         const token = localStorage.getItem('jwtToken');
         
         if (!token) {
-            console.log("❌ Proteção: Nenhum token encontrado");
+            console.log("Proteção: Nenhum token encontrado");
             redirecionarParaLogin();
             return false;
         }
@@ -20,7 +20,7 @@ async function protegerRota(roleRequerido = null) {
         const data = await resp.json();
         
         if (!data.valid) {
-            console.log("❌ Proteção: Token inválido");
+            console.log("Proteção: Token inválido");
             limparDadosUsuario();
             redirecionarParaLogin();
             return false;
@@ -28,8 +28,8 @@ async function protegerRota(roleRequerido = null) {
 
         // Verificar role específica se necessário
         if (roleRequerido && data.role !== roleRequerido) {
-            console.log(`❌ Proteção: Role ${data.role} não tem acesso (requerido: ${roleRequerido})`);
-            alert("❌ Você não tem permissão para acessar esta página.");
+            console.log(`Proteção: Role ${data.role} não tem acesso (requerido: ${roleRequerido})`);
+            alert("Você não tem permissão para acessar esta página.");
             window.location.href = "PainelUsuario.html";
             return false;
         }
@@ -54,9 +54,7 @@ function redirecionarParaLogin() {
     window.location.href = "Login.html";
 }
 
-// 🔧 NOVO: Proteção automática para páginas ADMIN
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica se estamos em uma página que requer autenticação
     const currentPage = window.location.pathname.split('/').pop();
     
     if (currentPage === 'CadastrarEvento.html' || 

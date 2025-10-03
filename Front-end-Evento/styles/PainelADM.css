@@ -1,5 +1,4 @@
 :root {
-<<<<<<< Updated upstream
     --primary-color: #d1410c;     
     --primary-hover: #304fc9;      
     --danger-color: #585163;  
@@ -13,39 +12,19 @@
 }
 
 .text-primary { color: var(--primary-color) !important; }
-=======
-    --soft-blue: #639BF0;    
-    --dark-gray: #495057;   
-    --light-gray: #E9ECEF;     
-    
-    --text-color-dark: #343a40;
-    --text-color-light: #6c757d;
-}
-
-.text-primary { color: var(--soft-blue) !important; }
->>>>>>> Stashed changes
 .bg-primary { 
     background-color: var(--primary-color) !important; 
     border-color: var(--primary-color) !important;
 }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 .btn-success { 
     background-color: var(--primary-color) !important; 
     border-color: var(--primary-color) !important;
     color: white !important;
 }
 .btn-success:hover {
-<<<<<<< Updated upstream
     background-color: var(--primary-color) !important; 
     border-color: var(--primary-color) !important;
-=======
-    background-color: #4A8AE6 !important; 
-    border-color: #4A8AEF !important;
->>>>>>> Stashed changes
 }
 
 .btn-danger { 
@@ -54,17 +33,11 @@
     color: white !important;
 }
 .btn-danger:hover {
-<<<<<<< Updated upstream
     background-color: var(--danger-hover) !important;
     border-color: var(--danger-hover) !important;
-=======
-    background-color: #343A40 !important;
-    border-color: #343A40 !important;
->>>>>>> Stashed changes
 }
 
 .btn-info { 
-<<<<<<< Updated upstream
     background-color: var(--info-color) !important; 
     border-color: var(--info-color) !important;
     color: var(--text-color-light-bg) !important; 
@@ -72,15 +45,6 @@
 .btn-info:hover {
     background-color: var(--info-hover) !important;
     border-color: var(--info-hover) !important;
-=======
-    background-color: var(--light-gray) !important; 
-    border-color: var(--light-gray) !important;
-    color: var(--text-color-dark) !important; 
-}
-.btn-info:hover {
-    background-color: #D3D9E0 !important; 
-    border-color: #D3D9E0 !important;
->>>>>>> Stashed changes
 }
 
 body {
@@ -130,11 +94,7 @@ h2 {
 
 #eventTable thead th {
     font-weight: 700;
-<<<<<<< Updated upstream
     background-color: var(--background-color); 
-=======
-    background-color: #f8f9fa; 
->>>>>>> Stashed changes
     color: var(--text-color-dark);
     vertical-align: middle;
 }

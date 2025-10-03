@@ -30,27 +30,16 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(Customizer.withDefaults())
-            
-            // ✅ MUDANÇA CRÍTICA: Stateless com JWT
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-
-            // ✅ Rotas públicas (mantidas)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/auth/**", "/", "/index.html", "/login.html",
-                    "/scripts/**", "/styles/**", "/public/**",
-                    "/api/public/**"
-                ).permitAll()
+                .requestMatchers("/auth/**", "/", "/index.html", "/login.html", "/scripts/**", "/styles/**", "/public/**", "/api/public/**").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
-
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
-
-            // ✅ Filtro JWT em vez de sessão
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

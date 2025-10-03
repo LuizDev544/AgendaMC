@@ -3,7 +3,7 @@ async function verificarSessao() {
         const token = localStorage.getItem('jwtToken');
         
         if (!token) {
-            console.log("❌ Nenhum token JWT encontrado");
+            console.log("Nenhum token JWT encontrado");
             window.location.href = "Login.html";
             return;
         }
@@ -26,7 +26,7 @@ async function verificarSessao() {
         console.log("Validação do token:", data);
 
         if (!data.valid) {
-            console.log("❌ Token inválido");
+            console.log("Token inválido");
             localStorage.removeItem('jwtToken');
             localStorage.removeItem('userData');
             window.location.href = "Login.html";

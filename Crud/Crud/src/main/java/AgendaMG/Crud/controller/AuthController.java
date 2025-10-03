@@ -39,27 +39,21 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        logger.info("🔑 Tentativa de login JWT para: {}", loginRequest.getEmail());
+        logger.info("Login: {}", loginRequest.getEmail());
         
         try {
-            // Autenticar com Spring Security
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getSenha())
             );
-            
-            // Gerar token JWT
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtUtil.generateToken(userDetails);
-            
-            // Obter role do banco
             String role = authService.getRoleFromDatabase(loginRequest.getEmail());
-            
-            logger.info("🎉 LOGIN JWT SUCESSO - Usuário: {}, Role: {}", loginRequest.getEmail(), role);
+            logger.info("True - Usuário: {}, Role: {}", loginRequest.getEmail(), role);
 
             return ResponseEntity.ok(LoginResponse.success(token, role, loginRequest.getEmail()));
             
         } catch (Exception e) {
-            logger.warn("❌ LOGIN JWT FALHOU para: {}", loginRequest.getEmail());
+            logger.warn("Login Falhou: {}", loginRequest.getEmail());
             return ResponseEntity.status(401).body(LoginResponse.error("Credenciais inválidas!"));
         }
     }
@@ -75,18 +69,13 @@ public class AuthController {
         }
         return ResponseEntity.ok(TokenValidationResponse.invalid());
     }
-
-    // Endpoint para logout (apenas para compatibilidade com frontend)
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
-        // Com JWT, o logout é feito no frontend removendo o token
-        // Este endpoint é apenas para compatibilidade
         String authHeader = request.getHeader("Authorization");
         
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            logger.info("🔓 Logout solicitado para token");
+            logger.info("Logout solicitado para token");
         }
-        
         return ResponseEntity.ok(Map.of(
             "message", "Logout realizado com sucesso!",
             "success", true

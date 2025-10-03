@@ -27,12 +27,11 @@ public class AuthService {
         return false;
     }
 
-    // Sempre retorna true pois só existe ADMIN
     public boolean isAdmin(String email) {
         return true;
     }
 
     public String getRoleFromDatabase(String email) {
-        return "ROLE_ADMIN"; // Fixo para ADMIN
+        return "ROLE_ADMIN";
     }
 }

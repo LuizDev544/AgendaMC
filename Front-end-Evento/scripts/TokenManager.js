@@ -55,7 +55,3 @@ class TokenManager {
         } : { 'Content-Type': 'application/json' };
     }
 }
-
-// Usar em outros arquivos:
-// const headers = TokenManager.getAuthHeaders();
-// const userData = TokenManager.getUserData();
