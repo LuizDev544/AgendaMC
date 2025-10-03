@@ -33,10 +33,8 @@ public class SecurityConfig {
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/auth/**", "/", "/index.html", "/login.html", "/scripts/**", "/styles/**", "/public/**", "/api/public/**"
+                .requestMatchers("/auth/**", "/", "/index.html", "/login.html", "/scripts/**", "/styles/**", "/public/**", "/api/public/**"     
                 ).permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -44,6 +42,7 @@ public class SecurityConfig {
 
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable())
+
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
