@@ -44,9 +44,13 @@ public class EventoController {
         return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/pulic/eventos/{tipoDoEvento}") 
-    public ResponseEntity<Evento> buscarEventoPortipoDoEvento(@PathVariable String tipoDoEvento ) {
-            Optional<Evento> evento = eventoService.buscarPortipo(tipoDoEvento);
+    @GetMapping("/public/eventos/tipo/{tipoDoEvento}") 
+    public ResponseEntity<List<Evento>> buscarEventoPorTipoDoEvento(@PathVariable String tipoDoEvento ) {
+        List<Evento> eventos = eventoService.buscarPorTipo(tipoDoEvento);
+        if (eventos == null || eventos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(eventos);
     }
 
     @GetMapping("/eventos")

@@ -26,6 +26,11 @@ public class EventoService {
     public Optional<Evento> buscarPorId(int id) {
         return eventoRepository.findById(id);
     }
+    
+    public List<Evento> buscarPorTipo(String tipoDoEvento) {
+        return eventoRepository.findByTipoDoEvento(tipoDoEvento);
+    }
+
 
     public Evento atualizarEvento(int id, Evento eventoAtualizado) {
         return eventoRepository.findById(id).map(evento -> {
