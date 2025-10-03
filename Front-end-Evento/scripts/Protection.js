@@ -26,7 +26,6 @@ async function protegerRota(roleRequerido = null) {
             return false;
         }
 
-        // Verificar role específica se necessário
         if (roleRequerido && data.role !== roleRequerido) {
             console.log(`Proteção: Role ${data.role} não tem acesso (requerido: ${roleRequerido})`);
             alert("Você não tem permissão para acessar esta página.");

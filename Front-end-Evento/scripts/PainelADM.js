@@ -2,13 +2,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("PainelADM.js carregado");
     
     try {
-        // Carregar dados do usuário
         const userData = JSON.parse(localStorage.getItem('userData'));
         if (userData) {
             document.getElementById('userInfo').textContent = `Admin: ${userData.usuario}`;
         }
-
-        // Carregar dados do dashboard
         await carregarDashboard();
         
     } catch (error) {
@@ -55,14 +52,15 @@ function atualizarDashboard(eventos) {
     document.getElementById('receitaEstimada').textContent = 
         `R$ ${receitaEstimada.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 
+    // Atualizar lista de eventos
     const listaEventos = document.getElementById('listaEventos');
     if (eventos.length > 0) {
         listaEventos.innerHTML = eventos.slice(0, 5).map(evento => `
             <div class="event-item">
                 <h4>${evento.nomeEvento}</h4>
-                <p>📅 ${new Date(evento.dataDoEvento).toLocaleDateString('pt-BR')}</p>
-                <p>📍 ${evento.localDoEvento}</p>
-                <p>💰 R$ ${evento.precoDoEvento?.toFixed(2) || '0.00'}</p>
+                <p> ${new Date(evento.dataDoEvento).toLocaleDateString('pt-BR')}</p>
+                <p> ${evento.localDoEvento}</p>
+                <p> R$ ${evento.precoDoEvento?.toFixed(2) || '0.00'}</p>
             </div>
         `).join('');
     } else {

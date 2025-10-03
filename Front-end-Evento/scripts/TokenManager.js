@@ -1,4 +1,3 @@
-// tokenManager.js - Gerenciador central de tokens JWT
 class TokenManager {
     static getToken() {
         return localStorage.getItem('jwtToken');

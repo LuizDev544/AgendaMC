@@ -16,19 +16,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "admin")
+@Table(name = "admin") 
 public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false)
     private String senha;
+
     @Column(nullable = false)
     private String nome;
+
     @Column(nullable = false)
     private String role = "ROLE_ADMIN";
-
 }

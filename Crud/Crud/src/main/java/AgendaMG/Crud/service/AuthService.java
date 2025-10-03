@@ -9,7 +9,7 @@ import AgendaMG.Crud.repository.AdminRepository;
 @Service
 public class AuthService {
 
-    private final AdminRepository adminRepository;
+    private final AdminRepository adminRepository; 
     private final PasswordEncoder passwordEncoder;
 
     public AuthService(AdminRepository adminRepository, PasswordEncoder passwordEncoder) {
@@ -20,15 +20,23 @@ public class AuthService {
     public boolean autenticar(String email, String senha) {
         Admin adminEncontrado = adminRepository.findByEmail(email);
         
+        System.out.println("Buscando admin: " + email);
+        System.out.println("Admin encontrado: " + (adminEncontrado != null));
+        
         if (adminEncontrado != null) {
-            return passwordEncoder.matches(senha, adminEncontrado.getSenha());
+            boolean senhaCorreta = passwordEncoder.matches(senha, adminEncontrado.getSenha());
+            System.out.println("Senha correta: " + senhaCorreta);
+            System.out.println("Senha fornecida: " + senha);
+            System.out.println("Senha no banco: " + adminEncontrado.getSenha());
+            return senhaCorreta;
         }
         
+        System.out.println("❌ Admin NÃO encontrado na tabela admin");
         return false;
     }
 
     public boolean isAdmin(String email) {
-        return true;
+        return true; // Todos são admin
     }
 
     public String getRoleFromDatabase(String email) {

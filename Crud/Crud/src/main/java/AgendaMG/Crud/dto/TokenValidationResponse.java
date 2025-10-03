@@ -1,10 +1,5 @@
 package AgendaMG.Crud.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class TokenValidationResponse {
     private boolean valid;
     private String usuario;
@@ -26,4 +21,27 @@ public class TokenValidationResponse {
         return new TokenValidationResponse(false, null, null);
     }
 
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

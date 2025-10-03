@@ -15,7 +15,7 @@ import AgendaMG.Crud.repository.AdminRepository;
 @Service
 public class UsuarioDetailsService implements UserDetailsService {
 
-    private final AdminRepository adminRepository;
+    private final AdminRepository adminRepository; 
 
     public UsuarioDetailsService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
@@ -23,11 +23,14 @@ public class UsuarioDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Admin admin = adminRepository.findByEmail(email);
+        Admin admin = adminRepository.findByEmail(email); 
         
         if (admin == null) {
             throw new UsernameNotFoundException("Administrador não encontrado: " + email);
         }
+
+        System.out.println("Admin encontrado: " + admin.getEmail());
+        System.out.println("Senha no banco: " + admin.getSenha());
 
         return new User(
             admin.getEmail(),

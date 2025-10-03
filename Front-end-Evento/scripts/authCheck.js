@@ -8,7 +8,6 @@ async function verificarSessao() {
             return;
         }
 
-        // Validar token no backend
         const resp = await fetch("http://localhost:8080/auth/validate", {
             method: "POST",
             headers: {
@@ -17,7 +16,6 @@ async function verificarSessao() {
             body: JSON.stringify({ token: token })
         });
 
-        // 🔧 CORREÇÃO: Verificar se a resposta é OK
         if (!resp.ok) {
             throw new Error("Erro na validação do token");
         }
@@ -43,5 +41,4 @@ async function verificarSessao() {
     }
 }
 
-// Executa automaticamente quando a página carrega
 document.addEventListener("DOMContentLoaded", verificarSessao);
