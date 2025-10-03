@@ -36,34 +36,3 @@ async function carregarDashboard() {
         console.error("Erro ao carregar dashboard:", error);
     }
 }
-
-function atualizarDashboard(eventos) {
-    const totalEventos = eventos.length;
-    const eventosFuturos = eventos.filter(evento => 
-        new Date(evento.dataDoEvento) >= new Date()
-    ).length;
-    
-    const receitaEstimada = eventos.reduce((total, evento) => 
-        total + (evento.precoDoEvento * evento.capacidadeDePessoasNoEvento), 0
-    );
-
-    document.getElementById('totalEventos').textContent = totalEventos;
-    document.getElementById('eventosFuturos').textContent = eventosFuturos;
-    document.getElementById('receitaEstimada').textContent = 
-        `R$ ${receitaEstimada.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-
-    // Atualizar lista de eventos
-    const listaEventos = document.getElementById('listaEventos');
-    if (eventos.length > 0) {
-        listaEventos.innerHTML = eventos.slice(0, 5).map(evento => `
-            <div class="event-item">
-                <h4>${evento.nomeEvento}</h4>
-                <p> ${new Date(evento.dataDoEvento).toLocaleDateString('pt-BR')}</p>
-                <p> ${evento.localDoEvento}</p>
-                <p> R$ ${evento.precoDoEvento?.toFixed(2) || '0.00'}</p>
-            </div>
-        `).join('');
-    } else {
-        listaEventos.innerHTML = '<p>Nenhum evento cadastrado.</p>';
-    }
-}
