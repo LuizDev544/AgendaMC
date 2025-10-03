@@ -12,24 +12,20 @@ import AgendaMG.Crud.entity.Usuario;
 public class UsuarioDetails implements UserDetails {
 
     private final Usuario usuario;
-
+    
     public UsuarioDetails(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    // 🚨 ESSENCIAL: Mapeia o campo "ROLE_ADMIN" do seu objeto Usuario
-@Override
-public Collection<? extends GrantedAuthority> getAuthorities() {
-    // 🚨 BYPASS: Garante que a role do banco é usada, assumindo que é a STRING CORRETA.
-    String roleDoBanco = usuario.getRole(); 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String roleDoBanco = usuario.getRole();
 
-    // Opcional: Se a role por algum motivo vier como "ADMIN", prefixamos aqui.
-    if (!roleDoBanco.startsWith("ROLE_")) {
-        roleDoBanco = "ROLE_" + roleDoBanco;
+        if (!roleDoBanco.startsWith("ROLE_")) {
+            roleDoBanco = "ROLE_" + roleDoBanco;
+        }
+        return Collections.singletonList(new SimpleGrantedAuthority(roleDoBanco));
     }
-    
-    return Collections.singletonList(new SimpleGrantedAuthority(roleDoBanco));
-}
 
     @Override
     public String getPassword() {
@@ -40,10 +36,24 @@ public Collection<? extends GrantedAuthority> getAuthorities() {
     public String getUsername() {
         return usuario.getEmail();
     }
-    
-    // Deixe os métodos de status da conta como 'true'
-    @Override public boolean isAccountNonExpired() { return true; }
-    @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled() { return true; }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

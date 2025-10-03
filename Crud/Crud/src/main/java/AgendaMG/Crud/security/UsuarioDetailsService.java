@@ -20,14 +20,12 @@ public class UsuarioDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         
-        // CORREÇÃO DE COMPILAÇÃO: Aceita o retorno de Usuario (ou null)
         Usuario usuario = usuarioRepository.findByEmail(email);
 
         if (usuario == null) { 
             throw new UsernameNotFoundException("Usuário não encontrado: " + email);
         }
-        
-        // Retorna a classe UsuarioDetails
+
         return new UsuarioDetails(usuario); 
     }
 }

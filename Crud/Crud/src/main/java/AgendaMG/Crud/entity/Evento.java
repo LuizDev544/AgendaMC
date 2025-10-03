@@ -18,25 +18,26 @@ import lombok.Setter;
 @Entity
 @Table(name = "Eventos")
 public class Evento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "NomeEvento")
     private String nomeEvento;
-    @Column(name="DescricaoDoEvento")
+    @Column(name = "DescricaoDoEvento")
     private String descricaoDoEvento;
-    @Column(name="DataDoEvento")
+    @Column(name = "DataDoEvento")
     private String dataDoEvento;
-    @Column(name="LocalDoEvento")
+    @Column(name = "LocalDoEvento")
     private String localDoEvento;
-    @Column(name="PrecoDoEvento")
+    @Column(name = "PrecoDoEvento")
     private double precoDoEvento;
-    @Column(name="CapacidadeDePessoasNoEvento")
+    @Column(name = "CapacidadeDePessoasNoEvento")
     private int capacidadeDePessoasNoEvento;
-    @Column(name="TipoDoEvento")
+    @Column(name = "TipoDoEvento")
     private String tipoDoEvento;
     @Column(name = "ApresentadorDoEvento")
     private String apresentadorDoEvento;
-    @Column(name="DuracaoDoEvento")
+    @Column(name = "DuracaoDoEvento")
     private String duracaoDoEvento;
 }

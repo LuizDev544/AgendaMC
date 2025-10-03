@@ -16,10 +16,10 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    @PostMapping("/admin/eventos") 
+    @PostMapping("/admin/eventos")
     public ResponseEntity<Evento> salvarEvento(@RequestBody Evento evento) {
         Evento novoEvento = eventoService.salvarEvento(evento);
-        return ResponseEntity.ok(novoEvento); 
+        return ResponseEntity.ok(novoEvento);
     }
 
     @GetMapping("/public/eventos")
@@ -30,7 +30,7 @@ public class EventoController {
     @GetMapping("/public/eventos/{id}")
     public ResponseEntity<Evento> buscarEventoPorId(@PathVariable int id) {
         Optional<Evento> evento = eventoService.buscarPorId(id);
-        
+
         return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

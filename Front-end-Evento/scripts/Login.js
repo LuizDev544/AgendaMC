@@ -22,23 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
 
-            // 📢 PASSO 3 DE VERIFICAÇÃO: Veja o valor exato no console.
             console.log("Status da Resposta:", response.status);
             console.log("Role recebida do servidor:", data.role);
 
 
             if (response.ok) {
                 alert(data.message);
-
-                // 1. Converte a role para maiúscula (para evitar problemas de caixa)
                 const userRole = data.role ? data.role.toUpperCase() : null;
 
                 // 2. Lógica de Redirecionamento 
                 if (userRole === "ADMIN") {
-                    // ✅ REDIRECIONAMENTO EXCLUSIVO PARA ADMIN
                     window.location.href = "PainelADM.html";
                 } else {
-                    // ✅ Redirecionamento para qualquer outro usuário (ou caso a role seja nula)
                     window.location.href = "PainelUsuario.html";
                 }
 
