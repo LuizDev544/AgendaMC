@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Limpar dados do JWT do localStorage
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('userData');
     
